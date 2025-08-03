@@ -12,15 +12,14 @@ author_profile: true
 
 {% for year in pubs_by_year %}
   <h2>{{ year.name }}</h2>
-
-  <ul>
+  <ul style="list-style-type: disc; padding-left: 1.25rem;">
     {% for pub in year.items %}
       <li style="margin-bottom: 1em;">
-        <strong>{{ pub.title }}</strong>
-        {% if pub.paperurl %}[<a href="{{ pub.paperurl }}">PDF</a>]{% endif %}
-        {% if pub.codeurl %}[<a href="{{ pub.codeurl }}">Code</a>]{% endif %}<br>
-        {{ pub.authors }}<br>
-        <em>{{ pub.venue }}</em>
+        {{ pub.title }}
+        {% if pub.paperurl %} [<a href="{{ pub.paperurl }}">PDF</a>]{% endif %}
+        {% if pub.codeurl %} [<a href="{{ pub.codeurl }}">Code</a>]{% endif %}<br>
+        <strong>{{ pub.authors }}</strong><br>
+        <em>{{ pub.venue }}</em>{% if pub.venue_abbrev %} (<strong>{{ pub.venue_abbrev }}</strong>){% endif %}, {{ pub.date | date: "%Y" }}
       </li>
     {% endfor %}
   </ul>
