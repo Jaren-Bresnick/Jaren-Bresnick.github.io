@@ -5,8 +5,6 @@ permalink: /publications/
 author_profile: true
 ---
 
-<p><em>(* = Equal Contribution)</em></p>
-
 {% assign pubs_by_year = site.publications | sort: "date" | reverse | group_by_exp:"item", "item.date | date: '%Y'" %}
 
 {% for year in pubs_by_year %}
@@ -17,7 +15,7 @@ author_profile: true
         {{ pub.title }}
         {% if pub.paperurl %} [<a href="{{ pub.paperurl }}">PDF</a>]{% endif %}
         {% if pub.codeurl %} [<a href="{{ pub.codeurl }}">Code</a>]{% endif %}<br>
-        <strong>{{ pub.authors }}</strong><br>
+        {{ pub.authors | markdownify | remove: '<p>' | remove: '</p>' }}<br>
         <em>{{ pub.venue }}</em>{% if pub.venue_abbrev %} (<strong>{{ pub.venue_abbrev }}</strong>){% endif %}, {{ pub.date | date: "%Y" }}
       </li>
     {% endfor %}
